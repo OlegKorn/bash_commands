@@ -6,6 +6,5 @@ curl -s https://ballotpedia.org/Cordova_City_School_District,_Alaska | grep -oP 
 # write links
 torify curl -s $(cat file_with_links.md) | grep -oP '(?<=href=).*(?=>Link)' >> district_links.md
 
-# write all links found by regex
-for link in `cat test.md`; do echo $link; torify curl -sS $link | grep -oP '(?<=href=).*(?=>Link)' >> 666.md; done
-
+# write all links found by regex + trim \n\r
+for link in `cat districts.md`; do echo $link | tr '\r' '\n'; torify curl -sS $link | grep -oP '(?<=href=).*(?=>Link)' >> urls_of_schools.md; done
