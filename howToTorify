@@ -1,0 +1,3 @@
+torify curl -s http://httpbin.org/ip
+systemctl status tor
+

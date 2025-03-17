@@ -1,0 +1,11 @@
+curl -A "Mozilla/5.0" https://glaad.org/resourcelist | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | sort -u
+
+# find url of element
+curl -s https://ballotpedia.org/Cordova_City_School_District,_Alaska | grep -oP '(?<=href=).*(?=>Link)'
+
+# write links
+torify curl -s $(cat file_with_links.md) | grep -oP '(?<=href=).*(?=>Link)' >> district_links.md
+
+# write all links found by regex
+for link in `cat test.md`; do echo $link; torify curl -sS $link | grep -oP '(?<=href=).*(?=>Link)' >> 666.md; done
+
